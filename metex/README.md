@@ -31,3 +31,24 @@ Metex.Worker.temperature_of "Hong Kong"
 
 You should expect something returns like:
 `"Hong Kong: 31.0°C"`
+
+### Start background worker process
+
+```elixir
+iex -S mix
+
+# Spawn background process
+pid = spawn(Metex.Worker, :loop, [])
+
+# Query Singapore and flush message
+send(pid, {self, "Singapore"})
+flush
+
+# Query multiple and flush messages
+cities = ["Singapore", "Monaco", "Vatican City", "Hong Kong", "Macau"]
+cities |> Enum.each(fn city ->
+    pid = spawn(Metex.Worker, :loop, [])
+    send(pid, {self, city})
+    end)
+flush
+```
