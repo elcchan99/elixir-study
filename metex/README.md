@@ -96,4 +96,7 @@ Metex.GenServer.get_stats(pid)
 
 # 4.12 Stop GenServer
 Metex.GenServer.stop(pid)
+
+# 4.14 Handle info
+send(pid, "hello world")
 ```

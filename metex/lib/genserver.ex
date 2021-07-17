@@ -29,7 +29,12 @@ defmodule Metex.GenServer do
 
   def init(:ok) do
     {:ok, %{}}
-    end
+  end
+
+  def handle_info(msg, stats) do
+    IO.puts("received #{inspect msg}")
+    {:noreply, stats}
+  end
 
   def handle_call({:location, location}, _from, state) do
     case Worker.get_temperature(location) do
