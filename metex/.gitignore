@@ -25,3 +25,6 @@ metex-*.tar
 
 # Temporary files for e.g. tests
 /tmp
+
+# API keys
+.env

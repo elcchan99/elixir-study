@@ -35,6 +35,6 @@ defmodule Metex.Worker do
   end
 
   defp apikey do
-    ""
+    Application.get_env(:metex, Metex.Worker)[:api_key]
   end
 end
