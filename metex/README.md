@@ -44,6 +44,7 @@ pid = spawn(Metex.Worker, :loop, [])
 send(pid, {self, "Singapore"})
 flush
 
+# 3.4
 # Query multiple and flush messages
 cities = ["Singapore", "Monaco", "Vatican City", "Hong Kong", "Macau"]
 cities |> Enum.each(fn city ->
@@ -51,4 +52,9 @@ cities |> Enum.each(fn city ->
     send(pid, {self, city})
     end)
 flush
+
+# 3.5
+# Query multiple by a coordinator process
+cities = ["Singapore", "Monaco", "Vatican City", "Hong Kong", "Macau"]
+Metex.temperatures_of(cities)
 ```

@@ -12,7 +12,7 @@ defmodule Metex.Worker do
   end
 
   def temperature_of(location) do
-    result = url_for(location) |> IO.inspect() |> HTTPoison.get() |> parse_response()
+    result = url_for(location) |> HTTPoison.get() |> parse_response()
 
     case result do
       {:ok, temp} ->
