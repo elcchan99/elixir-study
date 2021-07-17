@@ -58,3 +58,19 @@ flush
 cities = ["Singapore", "Monaco", "Vatican City", "Hong Kong", "Macau"]
 Metex.temperatures_of(cities)
 ```
+
+## Exercises
+
+Ping Pong processes
+
+```elixir
+# Ping process should reply Ping on Pong message
+ping_process = spawn(Metex.Ping, :loop, [])
+send(ping_process, {self(), :ping})
+flush
+
+# Pong process should reply Ping on Pong message
+pong_process = spawn(Metex.Pong, :loop, [])
+send(pong_process, {self(), :pong})
+flush
+```
