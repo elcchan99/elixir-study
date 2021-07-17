@@ -1,21 +1,33 @@
 # Metex
 
-**TODO: Add description**
+This is the exercise from the book, The little Elixir & OTP Guidebook.
+To build a weather application in Chapter 3.2.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `metex` to your list of dependencies in `mix.exs`:
-
 ```elixir
-def deps do
-  [
-    {:metex, "~> 0.1.0"}
-  ]
-end
+mix deps.get
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/metex](https://hexdocs.pm/metex).
+## Get Started
 
+### Get API key from openweather
+
+The application requires access to openweathermap.
+Please sign up and got to https://home.openweathermap.org/api_keys get your access key. Then, set it to your shell or put it in a `.env` file.
+
+### Query weather
+
+```elixir
+# Source your API key
+source .env
+
+# Start an iex shell
+iex -S mix
+
+# Query weather
+Metex.Worker.temperature_of "Hong Kong"
+```
+
+You should expect something returns like:
+`"Hong Kong: 31.0°C"`
