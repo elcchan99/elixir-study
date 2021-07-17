@@ -13,6 +13,10 @@ defmodule Metex.GenServer do
     GenServer.call(pid, {:location, location})
   end
 
+  def get_stats(pid) do
+    GenServer.call(pid, :get_stats)
+  end
+
   ## Server Callbacks
 
   def init(:ok) do
@@ -29,6 +33,8 @@ defmodule Metex.GenServer do
         {:reply, :error, state}
     end
   end
+
+  def handle_call(:get_stats, _from, state), do: {:reply, state, state}
 
   defp update_state(old_state, location) do
     case Map.has_key?(old_state, location) do
