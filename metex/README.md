@@ -16,7 +16,7 @@ mix deps.get
 The application requires access to openweathermap.
 Please sign up and got to https://home.openweathermap.org/api_keys get your access key. Then, set it to your shell or put it in a `.env` file.
 
-### Query weather
+## 3 Query weather
 
 ```elixir
 # Source your API key
@@ -59,7 +59,7 @@ cities = ["Singapore", "Monaco", "Vatican City", "Hong Kong", "Macau"]
 Metex.temperatures_of(cities)
 ```
 
-## Exercises
+### Exercises
 
 Ping Pong processes
 
@@ -73,4 +73,18 @@ flush
 pong_process = spawn(Metex.Pong, :loop, [])
 send(pong_process, {self(), :pong})
 flush
+```
+
+## 4 OTP
+
+### GenServer
+
+```elixir
+iex -S mix
+
+# Start GenServer
+{:ok, pid} = Metex.GenServer.start_link
+# Call API
+Metex.GenServer.get_temperature(pid, "Hong Kong")
+
 ```
