@@ -93,4 +93,7 @@ Metex.GenServer.get_stats(pid)
 # 4.10 Reset statistic
 Metex.GenServer.reset_stats(pid)
 Metex.GenServer.get_stats(pid)
+
+# 4.12 Stop GenServer
+Metex.GenServer.stop(pid)
 ```

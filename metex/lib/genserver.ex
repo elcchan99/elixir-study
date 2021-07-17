@@ -21,6 +21,10 @@ defmodule Metex.GenServer do
     GenServer.cast(pid, :reset_stats)
   end
 
+  def stop(pid) do
+    GenServer.cast(pid, :stop)
+  end
+
   ## Server Callbacks
 
   def init(:ok) do
@@ -43,6 +47,16 @@ defmodule Metex.GenServer do
   def handle_cast(:reset_stats, _state) do
     {:ok, init_state} = init(:ok)
     {:noreply, init_state}
+  end
+
+  def handle_cast(:stop, state) do
+    {:stop, :normal, state}
+  end
+
+  def terminate(reason, state) do
+    IO.puts("Server terminated before of #{inspect reason}")
+      inspect state
+    :ok
   end
 
   defp update_state(old_state, location) do
