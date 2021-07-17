@@ -84,8 +84,13 @@ iex -S mix
 
 # Start GenServer
 {:ok, pid} = Metex.GenServer.start_link
-# Call API
+# 4.7 Call API
 Metex.GenServer.get_temperature(pid, "Hong Kong")
-# Get statistic
+
+# 4.9 Get statistic
+Metex.GenServer.get_stats(pid)
+
+# 4.10 Reset statistic
+Metex.GenServer.reset_stats(pid)
 Metex.GenServer.get_stats(pid)
 ```
