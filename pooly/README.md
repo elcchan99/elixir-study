@@ -32,9 +32,13 @@ pool_config = [
 
 {:ok, worker_sup} = Pooly.WorkerSupervisor.start_link({SampleWorker, :start_link, []})
 
-DynamicSupervisor.start_child(worker_sup, %{id: SampleWorker, start: {SampleWorker, :start_link, []}})
+{:ok, child_pid} = DynamicSupervisor.start_child(worker_sup, %{id: SampleWorker, start: {SampleWorker, :start_link, []}})
 
 DynamicSupervisor.which_children(worker_sup)
 
 DynamicSupervisor.count_children(worker_sup)
+
+SampleWorker.stop(child_pid)
+
+DynamicSupervisor.which_children(worker_sup)
 ```
