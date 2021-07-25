@@ -1,3 +1,2 @@
 defmodule Pooly do
-
 end

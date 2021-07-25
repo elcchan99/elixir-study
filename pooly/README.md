@@ -14,3 +14,27 @@ def deps do
   ]
 end
 ```
+
+## Plan ahead
+
+```elixir
+
+pool_config = [
+  mfs: {SampleWorker, :start_link, []},
+  size: 5,
+]
+
+```
+
+## 6.3
+
+```elixir
+
+{:ok, worker_sup} = Pooly.WorkerSupervisor.start_link({SampleWorker, :start_link, []})
+
+DynamicSupervisor.start_child(worker_sup, %{id: SampleWorker, start: {SampleWorker, :start_link, []}})
+
+DynamicSupervisor.which_children(worker_sup)
+
+DynamicSupervisor.count_children(worker_sup)
+```
