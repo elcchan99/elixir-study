@@ -1,6 +1,6 @@
 # ThySupervisor
 
-**TODO: Add description**
+Writing your own Supervisor
 
 ## Installation
 
@@ -15,7 +15,34 @@ def deps do
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/thy_supervisor](https://hexdocs.pm/thy_supervisor).
+## 5.4
 
+```elixir
+{:ok, sup_pid} = ThySupervisor.start_link([])
+
+{:ok, child_pid} = ThySupervisor.start_child(sup_pid, {ThyWorker, :start_link, []})
+
+Process.info(sup_pid, :links)
+
+self
+
+Process.exit(child_pid, :crash)
+
+Process.info(sup_pid, :links)
+
+ThySupervisor.which_children(sup_pid)
+```
+
+### Test restart
+
+```elixir
+{:ok, sup_pid} = ThySupervisor.start_link([])
+
+{:ok, child_pid} = ThySupervisor.start_child(sup_pid, {ThyWorker, :start_link, []})
+
+s = ThySupervisor.which_children(sup_pid)
+
+ThySupervisor.restart_child(sup_pid, child_pid, s[child_pid])
+
+ThySupervisor.which_children(sup_pid)
+```

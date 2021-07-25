@@ -62,7 +62,7 @@ defmodule ThySupervisor do
     end
   end
 
-  def handle_call({:restart_child, old_pid}, _from, state) do
+  def handle_call({:restart_child, old_pid, _}, _from, state) do
     case Map.fetch(state, old_pid) do
       {:ok, child_spec} ->
         case restart_child(old_pid, child_spec) do
@@ -108,7 +108,7 @@ defmodule ThySupervisor do
         case restart_child(old_pid, child_spec) do
           {:ok, {pid, child_spec}} ->
             new_state = state |> Map.delete(old_pid) |> Map.put(pid, child_spec)
-            {:reply, new_state}
+            {:noreply, new_state}
 
           :error ->
             {:noreply, state}
