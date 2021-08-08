@@ -9,11 +9,10 @@ defmodule Pooly.WorkerSupervisor do
     DynamicSupervisor.start_link(__MODULE__, init_arg, [])
   end
 
-  def start_child({m, f, a} = mfa) do
-    IO.inspect(mfa, label: "start_child")
-    spec = %{id: m, start: {m, f, a}, restart: :permanent}
-    DynamicSupervisor.start_child(__MODULE__, spec)
-  end
+  # def start_child({m, _, _} = mfa) do
+  #   spec = %{id: m, start: mfa, restart: :permanent}
+  #   DynamicSupervisor.start_child(__MODULE__, spec)
+  # end
 
   ## Callbacks
   def init(init_arg) do
