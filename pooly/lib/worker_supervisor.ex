@@ -1,9 +1,12 @@
 defmodule Pooly.WorkerSupervisor do
+  @doc """
+  The Supervisor that controls Worker processes
+  """
   use DynamicSupervisor
 
   ## API
-  def start_link({_, _, _} = init_arg) do
-    DynamicSupervisor.start_link(__MODULE__, init_arg)
+  def start_link(init_arg) do
+    DynamicSupervisor.start_link(__MODULE__, init_arg, name: __MODULE__)
   end
 
   def start_child({m, f, a} = mfa) do

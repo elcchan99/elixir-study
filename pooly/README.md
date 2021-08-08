@@ -42,3 +42,13 @@ SampleWorker.stop(child_pid)
 
 DynamicSupervisor.which_children(worker_sup)
 ```
+
+## 6.6
+
+```
+iex -S mix
+
+iex> :observer.start
+```
+
+![Sample observer diagram](version1-observer.png)
