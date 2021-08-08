@@ -6,7 +6,7 @@ defmodule Pooly.WorkerSupervisor do
 
   ## API
   def start_link(init_arg) do
-    DynamicSupervisor.start_link(__MODULE__, init_arg, name: __MODULE__)
+    DynamicSupervisor.start_link(__MODULE__, init_arg, [])
   end
 
   def start_child({m, f, a} = mfa) do
