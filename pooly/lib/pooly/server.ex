@@ -116,9 +116,9 @@ defmodule Pooly.Server do
     prepopulate(size - 1, sup, mfa, [new_worker(sup, mfa) | workers])
   end
 
-  defp new_worker(sup, mfa) do
-    IO.inspect("Server new_worker")
-    {:ok, worker} = DynamicSupervisor.start_child(sup, mfa)
+  defp new_worker(sup, {m, _, _} = mfa) do
+    spec = %{id: m, start: mfa, restart: :permanent}
+    {:ok, worker} = DynamicSupervisor.start_child(sup, spec)
     IO.inspect(worker, label: "created")
     worker
   end
